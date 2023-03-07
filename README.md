@@ -5,13 +5,8 @@
 [![](http://shields.katacoda.com/katacoda/smark/count.svg)](https://www.katacoda.com/smark/scenarios/snmptool)
 [![Go Report Card](https://goreportcard.com/badge/github.com/smarkm/snmptool)](https://goreportcard.com/report/github.com/smarkm/snmptool)
 
-## Download
-download the last version
-* Linux  : [snmp](https://github.com/smarkm/snmptool/releases/download/v0.0.3/snmp)
-* Window : [snmp.exe](https://github.com/smarkm/snmptool/releases/download/v0.0.3/snmp.exe)
 
 ## Usage
-![Show case](demo-v0.0.2.gif)
 ```
 Simple snmp tool
 
@@ -42,9 +37,3 @@ Flags:
 
 Use "snmptool [command] --help" for more information about a command.
 ```
-
-* you can [play online](https://www.katacoda.com/smark/scenarios/snmptool)
-
-## Road map
-
-

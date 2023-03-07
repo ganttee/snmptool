@@ -9,4 +9,5 @@ require (
 	github.com/soniah/gosnmp v1.22.0
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.6.2
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 )

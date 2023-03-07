@@ -1,8 +1,6 @@
 
-# simple make file
-default: build
+build.linux:
+	GOARCH=amd64 GOOS=linux go build -o snmptool .
 
-build:
-	./bin/build.sh
 clean:
-	rm -rf st
+	rm -rf snmptool
