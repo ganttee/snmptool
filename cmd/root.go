@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,12 +35,13 @@ const version = "V0.0.3"
 
 var cfgFile string
 
-//Common var
+// Common var
 var (
 	IP        string
 	Community string
 	snmpver   string
 	oid       string
+	Port      uint16
 	port      uint16
 	//v3 parameters
 	UserName     string
@@ -76,6 +77,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVarP(&IP, "ip", "i", "127.0.0.1", "target ip")
+	rootCmd.PersistentFlags().Uint16VarP(&Port, "port", "P", 161, "target port")
 	rootCmd.PersistentFlags().StringVarP(&Community, "community", "c", "public", "community")
 	rootCmd.PersistentFlags().StringVarP(&snmpver, "version", "v", "2c", "snmp version default is '2c'")
 	rootCmd.PersistentFlags().StringVarP(&UserName, "username", "u", "", "username")
@@ -133,7 +135,7 @@ func getSNMPParams() g.GoSNMP {
 	case "3":
 		return g.GoSNMP{
 			Target:             IP,
-			Port:               161,
+			Port:               Port,
 			Version:            g.Version3,
 			SecurityModel:      g.UserSecurityModel,
 			MsgFlags:           msgFlags,
@@ -143,7 +145,7 @@ func getSNMPParams() g.GoSNMP {
 
 	case "2c":
 		return g.GoSNMP{
-			Port:      161,
+			Port:      Port,
 			Community: Community,
 			Version:   g.Version2c,
 			Timeout:   time.Duration(2) * time.Second,
@@ -153,7 +155,7 @@ func getSNMPParams() g.GoSNMP {
 		}
 	case "1":
 		return g.GoSNMP{
-			Port:      161,
+			Port:      Port,
 			Community: Community,
 			Version:   g.Version1,
 			Timeout:   time.Duration(2) * time.Second,
@@ -191,12 +193,12 @@ func initConfig() {
 	}
 }
 
-//i2S string
+// i2S string
 func i2S(n int) string {
 	return strconv.Itoa(n)
 }
 
-//ParseOIDName parse named oid
+// ParseOIDName parse named oid
 func ParseOIDName(oid string) (target string) {
 	target = snmp.OIDs[oid]
 	if target == "" {
@@ -205,7 +207,7 @@ func ParseOIDName(oid string) (target string) {
 	return
 }
 
-//ParseSNMPVer RT
+// ParseSNMPVer RT
 func ParseSNMPVer() gosnmp.SnmpVersion {
 	switch snmpver {
 	case "1":
