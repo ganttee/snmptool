@@ -59,7 +59,7 @@ var (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "st",
+	Use:   "snmptool",
 	Short: "Simple snmp tool",
 	Long:  ``,
 	// Uncomment the following line if your bare application
