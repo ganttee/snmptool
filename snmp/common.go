@@ -3,10 +3,10 @@ package snmp
 import (
 	"fmt"
 
-	g "github.com/soniah/gosnmp"
+	g "github.com/gosnmp/gosnmp"
 )
 
-//System
+// System
 const (
 	SysObjectID = ".1.3.6.1.2.1.1.2.0"
 	SysDescr    = ".1.3.6.1.2.1.1.1.0"
@@ -17,12 +17,12 @@ const (
 	SysServices = ".1.3.6.1.2.1.1.7.0"
 )
 
-//MSG
+// MSG
 const (
 	InvalidValue = "invalid value"
 )
 
-//Common set
+// Common set
 var (
 	SNMPVersion = g.Version2c
 )
@@ -38,7 +38,7 @@ func init() {
 
 }
 
-//GetTable implement by BulkWalkAll
+// GetTable implement by BulkWalkAll
 func GetTable(s g.GoSNMP, oids []string) (tableRows map[string](map[string]g.SnmpPDU), e error) {
 	err := s.Connect()
 	if err != nil {
@@ -66,7 +66,7 @@ func GetTable(s g.GoSNMP, oids []string) (tableRows map[string](map[string]g.Snm
 	return
 }
 
-//GetOne ip,comunity,oid string
+// GetOne ip,comunity,oid string
 func GetOne(s g.GoSNMP, oid string) (rs g.SnmpPDU, err error) {
 	err = s.Connect()
 	if err != nil {
@@ -88,7 +88,7 @@ func GetOne(s g.GoSNMP, oid string) (rs g.SnmpPDU, err error) {
 	return
 }
 
-//GetSnmpString convert result 2 string
+// GetSnmpString convert result 2 string
 func GetSnmpString(p g.SnmpPDU) (v string) {
 	switch p.Type {
 	case g.OctetString:
@@ -102,7 +102,7 @@ func GetSnmpString(p g.SnmpPDU) (v string) {
 	return
 }
 
-//GetSnmpMacString get mac address
+// GetSnmpMacString get mac address
 func GetSnmpMacString(p g.SnmpPDU) (v string) {
 	switch p.Type {
 	case g.OctetString:
@@ -120,7 +120,7 @@ func GetSnmpMacString(p g.SnmpPDU) (v string) {
 	return
 }
 
-//GetSnmpInt convert result 2 itn
+// GetSnmpInt convert result 2 itn
 func GetSnmpInt(p g.SnmpPDU) (v int) {
 	switch p.Type {
 	case g.Integer:
@@ -131,7 +131,7 @@ func GetSnmpInt(p g.SnmpPDU) (v int) {
 	return
 }
 
-//GetSnmpInt64 get counter64
+// GetSnmpInt64 get counter64
 func GetSnmpInt64(p g.SnmpPDU) (v int64) {
 	switch p.Type {
 	case g.Integer:

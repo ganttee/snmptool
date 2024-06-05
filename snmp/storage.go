@@ -1,8 +1,8 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//Const
+// Const
 const (
 	WinStorageDescr = ".1.3.6.1.2.1.25.2.3.1.3"
 	WinStorageUnits = ".1.3.6.1.2.1.25.2.3.1.4"
@@ -10,7 +10,7 @@ const (
 	WinStorageUsed  = ".1.3.6.1.2.1.25.2.3.1.6"
 )
 
-//WinStorage  wap
+// WinStorage  wap
 type WinStorage struct {
 	Descr string `json:"descr"`
 	Units int    `json:"units"`
@@ -18,7 +18,7 @@ type WinStorage struct {
 	Used  int64  `json:"used"`
 }
 
-//GetWinStorage get loclTable
+// GetWinStorage get loclTable
 func GetWinStorage(s g.GoSNMP) (table []*WinStorage, err error) {
 	oids := []string{WinStorageDescr, WinStorageUnits, WinStorageSize, WinStorageUsed}
 	tableRows, err := GetTable(s, oids)

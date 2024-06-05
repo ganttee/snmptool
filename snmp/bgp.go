@@ -1,8 +1,8 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//BGP oids
+// BGP oids
 const (
 	BgpLocalAS = ".3.6.1.2.1.15.2.0"
 
@@ -14,7 +14,7 @@ const (
 	BgpPeerStateOid      = ".1.3.6.1.2.1.15.3.1.2"
 )
 
-//Var
+// Var
 var (
 	PeerState = []string{"idle(1)", "connect(2)", "active(3)", "opensent(4)", "openconfirm(5)", "established(6)"}
 )
@@ -29,7 +29,7 @@ func init() {
 	OIDs["bgpPeerStateOid"] = BgpPeerStateOid
 }
 
-//BGPPeer snmp struct
+// BGPPeer snmp struct
 type BGPPeer struct {
 	LocalAddr  string
 	LocalPort  int
@@ -39,7 +39,7 @@ type BGPPeer struct {
 	PeerState  int
 }
 
-//PeerStateStr readable state
+// PeerStateStr readable state
 func (p *BGPPeer) PeerStateStr() string {
 	if p.PeerState > 0 {
 		return PeerState[p.PeerState-1]
@@ -47,7 +47,7 @@ func (p *BGPPeer) PeerStateStr() string {
 	return InvalidValue
 }
 
-//GetLocalAS get local as
+// GetLocalAS get local as
 func GetLocalAS(s g.GoSNMP) (as int, err error) {
 	pdu, err := GetOne(s, BgpLocalAS)
 	if err != nil {
@@ -57,7 +57,7 @@ func GetLocalAS(s g.GoSNMP) (as int, err error) {
 	return
 }
 
-//GetBGPPeerTable get Nbr table
+// GetBGPPeerTable get Nbr table
 func GetBGPPeerTable(s g.GoSNMP) (rs []*BGPPeer, err error) {
 	oids := []string{BgpPeerLocalAddrOid, BgpPeerLocalPortOid, BgpPeerRemoteAddrOid,
 		BgpPeerRemotePortOid, BgpPeerRemoteASOid, BgpPeerStateOid}

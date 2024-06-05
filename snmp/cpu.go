@@ -1,18 +1,18 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//Const
+// Const
 const (
 	OIDHrProcessorLoad = ".1.3.6.1.2.1.25.3.3.1.2"
 )
 
-//HrProcessorLoad process load wap
+// HrProcessorLoad process load wap
 type HrProcessorLoad struct {
 	Load int
 }
 
-//GetHrProcessorLoad get loclTable
+// GetHrProcessorLoad get loclTable
 func GetHrProcessorLoad(s g.GoSNMP) (table []*HrProcessorLoad, err error) {
 	oids := []string{OIDHrProcessorLoad}
 	tableRows, err := GetTable(s, oids)

@@ -1,8 +1,8 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//OspfIfTable oids
+// OspfIfTable oids
 const (
 	OspfIfIPAddressOid = ".1.3.6.1.2.1.14.7.1.1"
 	OspfIfAdminStatOid = ".1.3.6.1.2.1.14.7.1.5"
@@ -10,21 +10,21 @@ const (
 	OspfIfStatusOid    = ".1.3.6.1.2.1.14.7.1.17"
 )
 
-//OspfIfTable oids
+// OspfIfTable oids
 const (
 	OspfNbrIPAddrOid = ".1.3.6.1.2.1.14.10.1.1"
 	OspfNbrRtrIDOid  = ".1.3.6.1.2.1.14.10.1.3"
 	OspfNbrStateOid  = ".1.3.6.1.2.1.14.10.1.6"
 )
 
-//Values
+// Values
 var (
 	IfState      = []string{"down (1)", "loopback (2)", "waiting (3)", "pointToPoint (4)", "designatedRouter (5)", "backupDesignatedRouter (6)", "otherDesignatedRouter (7)"}
 	IfAdminState = []string{"enabled (1)", "disabled (2)"}
 	NbrState     = []string{"down (1)", "attempt (2)", "init (3)", "twoWay (4)", "exchangeStart (5)", "exchange (6)", "loading (7)", "full (8)"}
 )
 
-//OspfItem ospf iftable item
+// OspfItem ospf iftable item
 type OspfItem struct {
 	OspfIfIPAddress string
 	OspfIfAdminStat int
@@ -32,14 +32,14 @@ type OspfItem struct {
 	OspfIfStatus    int
 }
 
-//OspfNbrItem ospf iftable item
+// OspfNbrItem ospf iftable item
 type OspfNbrItem struct {
 	NbrIPAddress string
 	NbrRtrID     string
 	NbrState     int
 }
 
-//StateStr parse meaningful value
+// StateStr parse meaningful value
 func (o *OspfItem) StateStr() string {
 	if o.OspfIfState > 0 {
 		return IfState[o.OspfIfState-1]
@@ -47,7 +47,7 @@ func (o *OspfItem) StateStr() string {
 	return "invalid value"
 }
 
-//AdminStateStr parse meaningful value
+// AdminStateStr parse meaningful value
 func (o *OspfItem) AdminStateStr() string {
 	if o.OspfIfAdminStat > 0 {
 		return IfState[o.OspfIfAdminStat-1]
@@ -55,7 +55,7 @@ func (o *OspfItem) AdminStateStr() string {
 	return "invalid value"
 }
 
-//GetOspfIfTable get loclTable
+// GetOspfIfTable get loclTable
 func GetOspfIfTable(s g.GoSNMP) (ips []*OspfItem, err error) {
 	oids := []string{OspfIfIPAddressOid, OspfIfAdminStatOid, OspfIfStateOid, OspfIfStatusOid}
 	tableRows, err := GetTable(s, oids)
@@ -80,7 +80,7 @@ func GetOspfIfTable(s g.GoSNMP) (ips []*OspfItem, err error) {
 	return
 }
 
-//GetOspfNbrTable get Nbr table
+// GetOspfNbrTable get Nbr table
 func GetOspfNbrTable(s g.GoSNMP) (rs []*OspfNbrItem, err error) {
 	oids := []string{OspfNbrIPAddrOid, OspfNbrRtrIDOid, OspfNbrStateOid}
 	tableRows, err := GetTable(s, oids)
@@ -97,7 +97,7 @@ func GetOspfNbrTable(s g.GoSNMP) (rs []*OspfNbrItem, err error) {
 	return
 }
 
-//NbrStateStr RT
+// NbrStateStr RT
 func (o *OspfNbrItem) NbrStateStr() string {
 	if o.NbrState > 0 {
 		return NbrState[o.NbrState-1]

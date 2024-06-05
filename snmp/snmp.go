@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/smarkm/snmptool/snmp/model"
-	g "github.com/soniah/gosnmp"
+	"github.com/ganttee/snmptool/snmp/model"
+	g "github.com/gosnmp/gosnmp"
 )
 
-//GetSystem get base system information
+// GetSystem get base system information
 func GetSystem(s g.GoSNMP) (d model.Device, e error) {
 	return GetDeviceInfo(s)
 }
 
-//Ping snmp pring
+// Ping snmp pring
 func Ping(s g.GoSNMP) (d model.Device, e error) {
 	return GetSystem(s)
 }
 
-//GetHostName RT
+// GetHostName RT
 func GetHostName(s g.GoSNMP) (host string, err error) {
 	device, err := GetSystem(s)
 	if err != nil {
@@ -27,7 +27,7 @@ func GetHostName(s g.GoSNMP) (host string, err error) {
 	return device.Name, nil
 }
 
-//GetDeviceInfo get base system information
+// GetDeviceInfo get base system information
 func GetDeviceInfo(s g.GoSNMP) (d model.Device, err error) {
 	err = s.Connect()
 	if err != nil {

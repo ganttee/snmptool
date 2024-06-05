@@ -22,7 +22,7 @@ matrix:
 
 install:
   - go get github.com/mitchellh/cli
-  - go get github.com/soniah/gosnmp
+  - go get github.com/gosnmp/gosnmp
   - go get github.com/go-bindata/go-bindata
   - go get github.com/smarkm/golang-underscore
  

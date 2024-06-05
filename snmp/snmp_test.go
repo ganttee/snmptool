@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/smarkm/snmptool/snmp/util"
+	"github.com/ganttee/snmptool/snmp/util"
 
-	"github.com/soniah/gosnmp"
+	"github.com/gosnmp/gosnmp"
 )
 
 var local = "127.0.0.1"

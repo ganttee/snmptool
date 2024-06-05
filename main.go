@@ -1,6 +1,6 @@
 package main
 
-import "github.com/smarkm/snmptool/cmd"
+import "github.com/ganttee/snmptool/cmd"
 
 func main() {
 	cmd.Execute()

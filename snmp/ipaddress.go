@@ -3,18 +3,18 @@ package snmp
 import (
 	"strconv"
 
-	"github.com/smarkm/snmptool/snmp/util"
-	g "github.com/soniah/gosnmp"
+	"github.com/ganttee/snmptool/snmp/util"
+	g "github.com/gosnmp/gosnmp"
 )
 
-//Oid of ipAddTable[.1.3.6.1.2.1.4.20]
+// Oid of ipAddTable[.1.3.6.1.2.1.4.20]
 const (
 	OIDIpAdEntAddr    = ".1.3.6.1.2.1.4.20.1.1"
 	OIDIpAdEntIfIndex = ".1.3.6.1.2.1.4.20.1.2"
 	OIDIpAdEntNetMask = ".1.3.6.1.2.1.4.20.1.3"
 )
 
-//IPAddr Entity
+// IPAddr Entity
 type IPAddr struct {
 	IP      string
 	IfIndex int
@@ -22,7 +22,7 @@ type IPAddr struct {
 	IfDesc  string
 }
 
-//GetIPAddrTable get loclTable
+// GetIPAddrTable get loclTable
 func GetIPAddrTable(s g.GoSNMP) (ips []*IPAddr, err error) {
 	oids := []string{OIDIpAdEntAddr, OIDIpAdEntIfIndex, OIDIpAdEntNetMask}
 	tableRows, err := GetTable(s, oids)

@@ -4,21 +4,21 @@ import (
 	"log"
 	"net"
 
-	"github.com/soniah/gosnmp"
+	"github.com/gosnmp/gosnmp"
 )
 
 var (
 	recivers = make(map[string]*TrapReciver)
 )
 
-//TrapReciver RT
+// TrapReciver RT
 type TrapReciver struct {
 	Address     string
 	i           *gosnmp.TrapListener
 	TrapHandler func(s *gosnmp.SnmpPacket, u *net.UDPAddr)
 }
 
-//Start start an Reciver instance
+// Start start an Reciver instance
 func (r *TrapReciver) Start() {
 
 	recivers[r.Address] = r
@@ -30,14 +30,14 @@ func (r *TrapReciver) Start() {
 	r.i.Listen(r.Address)
 }
 
-//Close instance
+// Close instance
 func (r *TrapReciver) Close() {
 	address := r.Address
 	r.i.Close()
 	delete(recivers, address)
 }
 
-//registDeviceTrapHandler device level handler
+// registDeviceTrapHandler device level handler
 func registDeviceTrapHandler(s *gosnmp.SnmpPacket, u *net.UDPAddr) {
 	tmp := make(map[string]gosnmp.SnmpPDU)
 	for _, pdu := range s.Variables {

@@ -5,11 +5,11 @@ import (
 	"strings"
 )
 
-//HandleError RT
+// HandleError RT
 func HandleError(err error) {
 	msg := err.Error()
 	fmt.Println(msg)
 	if strings.Contains(msg, "timeout") {
-		fmt.Println("Report to: https://github.com/smarkm/snmptool/issues")
+		fmt.Println("Report to: https://github.com/ganttee/snmptool/issues")
 	}
 }

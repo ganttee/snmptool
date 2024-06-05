@@ -1,8 +1,8 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//Const
+// Const
 const (
 	CdpInterfaceIfIndexOid       = ".1.3.6.1.4.1.9.9.23.1.1.1.1.1"
 	CdpInterfaceIfEnableOid      = ".1.3.6.1.4.1.9.9.23.1.1.1.1.2"
@@ -12,12 +12,12 @@ const (
 	CdpInterfaceIfNameOid        = ".1.3.6.1.4.1.9.9.23.1.1.1.1.6"
 )
 
-//Var
+// Var
 var (
 	Enable = []string{"true(1)", "false(2)"}
 )
 
-//CDPItem basic information wap
+// CDPItem basic information wap
 type CDPItem struct {
 	IfIndex     int
 	Enable      int
@@ -27,7 +27,7 @@ type CDPItem struct {
 	Name        string
 }
 
-//ParseEnable value
+// ParseEnable value
 func (i *CDPItem) ParseEnable() string {
 	if i.Enable > 0 {
 		return Enable[i.Enable-1]
@@ -35,7 +35,7 @@ func (i *CDPItem) ParseEnable() string {
 	return "invalid value"
 }
 
-//GetCDPTable get loclTable
+// GetCDPTable get loclTable
 func GetCDPTable(s g.GoSNMP) (ips []*CDPItem, err error) {
 	oids := []string{CdpInterfaceIfIndexOid, CdpInterfaceIfEnableOid, CdpInterfaceIfMsgIntervalOid, CdpInterfaceIfGroupOid, CdpInterfaceIfPortOid, CdpInterfaceIfNameOid}
 	tableRows, err := GetTable(s, oids)

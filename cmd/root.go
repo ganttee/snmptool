@@ -21,10 +21,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/smarkm/snmptool/snmp"
-	"github.com/smarkm/snmptool/snmp/util"
-	"github.com/soniah/gosnmp"
-	g "github.com/soniah/gosnmp"
+	"github.com/ganttee/snmptool/snmp"
+	"github.com/ganttee/snmptool/snmp/util"
+	"github.com/gosnmp/gosnmp"
+	g "github.com/gosnmp/gosnmp"
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"

@@ -1,8 +1,8 @@
 package snmp
 
-import g "github.com/soniah/gosnmp"
+import g "github.com/gosnmp/gosnmp"
 
-//IPforward table itme ,.1.3.6.1.2.1.4.24.2
+// IPforward table itme ,.1.3.6.1.2.1.4.24.2
 const (
 	IPForwardDest    = ".1.3.6.1.2.1.4.24.2.1.1"
 	IPForwardMask    = ".1.3.6.1.2.1.4.24.2.1.2"
@@ -10,7 +10,7 @@ const (
 	IPForwardIfIndex = ".1.3.6.1.2.1.4.24.2.1.5"
 )
 
-//IPForwardItem from if table
+// IPForwardItem from if table
 type IPForwardItem struct {
 	Dest    string `json:"dest"`
 	Mask    string `json:"mask"`
@@ -18,7 +18,7 @@ type IPForwardItem struct {
 	IfIndex int    `json:"ifIndex"`
 }
 
-//GetIPForwardTable get loclTable
+// GetIPForwardTable get loclTable
 func GetIPForwardTable(s g.GoSNMP) (items []*IPForwardItem, err error) {
 	oids := []string{IPForwardDest, IPForwardMask, IPForwardNextHop, IPForwardIfIndex}
 	tableRows, err := GetTable(s, oids)

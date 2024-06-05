@@ -3,10 +3,10 @@ package snmp
 import (
 	"strings"
 
-	g "github.com/soniah/gosnmp"
+	g "github.com/gosnmp/gosnmp"
 )
 
-//LLDP
+// LLDP
 const (
 	//LLdpLocPortSubtype = [...]string{""}
 	LldpLocPortNum       = ".1.0.8802.1.1.2.1.3.7.1.1"
@@ -28,7 +28,7 @@ const (
 	LLdpRemSysCapEnabled    = ".1.0.8802.1.1.2.1.4.1.1.12"
 )
 
-//LLdpLoc lldap
+// LLdpLoc lldap
 type LLdpLoc struct {
 	LldpLocPortNum       string
 	LldpLocPortIDSubtype string
@@ -36,7 +36,7 @@ type LLdpLoc struct {
 	LldpLocPortDesc      string
 }
 
-//LLdpRem lldprem
+// LLdpRem lldprem
 type LLdpRem struct {
 	LLdpRemLocalPortNum string
 	LLdpRemSysName      string
@@ -44,7 +44,7 @@ type LLdpRem struct {
 	LLdpRemPortDesc     string
 }
 
-//GetLocalIndex RT
+// GetLocalIndex RT
 func (l *LLdpRem) GetLocalIndex() string {
 	indexs := strings.Split(l.LLdpRemLocalPortNum, ".")
 	if len(indexs) > 2 {
@@ -53,7 +53,7 @@ func (l *LLdpRem) GetLocalIndex() string {
 	return ""
 }
 
-//GetRemIndex RT
+// GetRemIndex RT
 func (l *LLdpRem) GetRemIndex() string {
 	indexs := strings.Split(l.LLdpRemLocalPortNum, ".")
 	if len(indexs) > 2 {
@@ -62,7 +62,7 @@ func (l *LLdpRem) GetRemIndex() string {
 	return ""
 }
 
-//GetLLdpLocalTable get loclTable
+// GetLLdpLocalTable get loclTable
 func GetLLdpLocalTable(s g.GoSNMP) (lldpls []*LLdpLoc, err error) {
 	oids := []string{LldpLocPortNum, LldpLocPortID, LldpLocPortDesc, LldpLocPortIDSubtype}
 	tableRows, err := GetTable(s, oids)
@@ -80,7 +80,7 @@ func GetLLdpLocalTable(s g.GoSNMP) (lldpls []*LLdpLoc, err error) {
 	return
 }
 
-//GetLLdpRemTable get remote table
+// GetLLdpRemTable get remote table
 func GetLLdpRemTable(s g.GoSNMP) (lldpls []*LLdpRem, err error) {
 	oids := []string{LLdpRemSysName, LLdpRemPortID, LLdpRemPortDesc}
 	tableRows, err := GetTable(s, oids)

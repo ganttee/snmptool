@@ -3,12 +3,12 @@ package snmp
 import (
 	"strconv"
 
+	"github.com/ganttee/snmptool/snmp/model"
+	g "github.com/gosnmp/gosnmp"
 	uc "github.com/smarkm/golang-underscore"
-	"github.com/smarkm/snmptool/snmp/model"
-	g "github.com/soniah/gosnmp"
 )
 
-//IfTable
+// IfTable
 const (
 	IfNumber          = ".1.3.6.1.2.1.2.1.0"
 	IfIndex           = ".1.3.6.1.2.1.2.2.1.1"
@@ -36,7 +36,7 @@ const (
 	IfName            = ".1.3.6.1.2.1.31.1.1.1.1"
 )
 
-//ipAddrTable
+// ipAddrTable
 const (
 	ipAdEntAddr         = ".1.3.6.1.2.1.4.20.1.1"
 	ipAdEntIfIndex      = ".1.3.6.1.2.1.4.20.1.2"
@@ -72,7 +72,7 @@ func init() {
 	OIDs["ifNumber"] = IfNumber
 }
 
-//GetPortsInformation get basic port information
+// GetPortsInformation get basic port information
 func GetPortsInformation(s g.GoSNMP) (ports map[int]*model.Port, err error) {
 	oids := []string{IfIndex, IfDescr, IfAdminStatus, IfOperStatus, IfMtu, IfSpeed, IfType, IfPhysAddress}
 	tableRows, err := GetTable(s, oids)
@@ -95,7 +95,7 @@ func GetPortsInformation(s g.GoSNMP) (ports map[int]*model.Port, err error) {
 	return
 }
 
-//GetIPTable get basic port information
+// GetIPTable get basic port information
 func GetIPTable(s g.GoSNMP) (ips map[int]string, err error) {
 	oids := []string{ipAdEntAddr, ipAdEntIfIndex}
 	tableRows, err := GetTable(s, oids)
@@ -110,7 +110,7 @@ func GetIPTable(s g.GoSNMP) (ips map[int]string, err error) {
 	return
 }
 
-//GetPortsStatus get basic port information
+// GetPortsStatus get basic port information
 func GetPortsStatus(s g.GoSNMP) (ports map[int]*model.Port, err error) {
 	oids := []string{IfIndex, IfAdminStatus, IfOperStatus}
 	tableRows, err := GetTable(s, oids)
@@ -128,7 +128,7 @@ func GetPortsStatus(s g.GoSNMP) (ports map[int]*model.Port, err error) {
 	return
 }
 
-//GetPortInformation device,communit,index string
+// GetPortInformation device,communit,index string
 func GetPortInformation(s g.GoSNMP, index string) (port *model.Port, err error) {
 	err = s.Connect()
 	if err != nil {
